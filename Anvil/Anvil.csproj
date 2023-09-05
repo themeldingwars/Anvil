@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
         <LangVersion>11</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -36,6 +36,22 @@
             <Pack>True</Pack>
             <Visible>False</Visible>
         </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\Fonts\Roboto-Light.ttf" />
+      <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
+      <None Remove="Resources\Icons\Ratchet.jpg" />
+      <None Remove="Resources\Icons\Ratchet.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\Icons\Ratchet.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\Fonts\Roboto-Light.ttf" />
+      <EmbeddedResource Include="Resources\Fonts\Roboto-Regular.ttf" />
     </ItemGroup>
 
     <ItemGroup>

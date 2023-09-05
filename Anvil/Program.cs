@@ -9,16 +9,7 @@ namespace Demo
     {
         static async Task Main()
         {
-            try
-            {
-                await AnvilTool.Run();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
+            await AnvilTool.Run();
         }
     }
 }
