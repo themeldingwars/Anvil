@@ -1,4 +1,6 @@
 ﻿using ImTool;
+using Serilog;
+using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +32,12 @@ namespace Anvil
 
         protected override bool Initialize(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day, outputTemplate: "{Timestamp:HH:mm:ss} [{Category}] [{Level:u3}] {Message:lj}{NewLine}{Exception}")
+                .WriteTo.AnvilSink()
+                .CreateLogger();
+
+
             FontManager.RegisterResourceAssembly(Assembly.GetExecutingAssembly());
             FontManager.AddFont(new Font("Roboto-Regular", 18, new FontFile("Anvil.Resources.Fonts.Roboto-Regular.ttf", new Vector2(0, -1))));
             FontManager.AddFont(new Font("Roboto-Light", 18, new FontFile("Anvil.Resources.Fonts.Roboto-Light.ttf", new Vector2(0, -1))));

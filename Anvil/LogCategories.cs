@@ -8,6 +8,8 @@ namespace Anvil
 {
     public enum LogCategories
     {
-
+        Default,
+        AssetExplorer,
+        ZoneEd
     }
 }
