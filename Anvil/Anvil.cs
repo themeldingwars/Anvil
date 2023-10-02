@@ -1,4 +1,5 @@
-﻿using ImTool;
+﻿using ImGuiNET;
+using ImTool;
 using Serilog;
 using Serilog.Core;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,14 +63,25 @@ namespace Anvil
             Window.AddTab(ZoneEd);
 
             Window.AddWindowButton("New Project", () => { NewProjectDialog.Show(); });
-            Window.AddWindowButton("Load Project", () => { });
+            Window.AddWindowButton("Load Project", () =>
+            {
+                ImGui.PushOverrideID(0);
+                FileBrowser.OpenFile((path) =>
+                {
+                    ProjectManager.LoadProject(path);
+                }, null, "*.anvil");
+                ImGui.PopID();
+            });
 
             Window.OnSubmitUIExtension += SubmitUiExtension;
         }
 
         protected void SubmitUiExtension()
         {
+            ImGui.PushOverrideID(0);
             FileBrowser.Draw();
+            ImGui.PopID();
+
             NewProjectDialog.Draw();
         }
 

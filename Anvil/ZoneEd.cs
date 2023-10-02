@@ -1,8 +1,14 @@
-﻿using ImGuiNET;
+﻿using Anvil.IO.World;
+using Anvil.IO.Zone;
+using Anvil.ZoneEd.Widgets;
+using ImGuiNET;
 using ImTool;
 using ImTool.Scene3D;
+using Microsoft.VisualBasic;
+using Serilog.Core;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Text;
 
 namespace Anvil
 {
@@ -16,17 +22,26 @@ namespace Anvil
         private ZoneEdScene MainView;
         private Dictionary<string, ZoneEdScene> Viewports = new Dictionary<string, ZoneEdScene>();
 
+        private EditableZone EditZone;
+        private LayerListWidget LayerList     = new();
+        private LayerInspector LayerInspector = new();
+
         public ZoneEdTab(AnvilTool anvil)
         {
             Anvil       = anvil;
             CreateWorld();
             MainView    = AddViewport("Main View");
             EditorWorld.Init(MainView);
+
+            LayerList.OnLayerSelected = (layer) =>
+            {
+                LayerInspector.SetLayer(layer);
+            };
         }
 
         public override void Load()
         {
-
+            
         }
 
         public override void Unload()
@@ -53,12 +68,8 @@ namespace Anvil
                 viewport.Value.DrawWindow(viewport.Key);
             }
 
-            if (ImGui.Begin("Layers"))
-            {
-                ImGui.End();
-            }
-
-
+            LayerList.Draw(EditZone);
+            LayerInspector.Draw();
 
             Anvil.LogWindow.Name = "Logs###ZoneEd";
             Anvil.LogWindow.DrawWindow();
@@ -68,6 +79,10 @@ namespace Anvil
         {
             if (ImGui.BeginMenu("File"))
             {
+                if (ImGui.MenuItem("Open"))
+                {
+                    OpenZone();
+                }
 
                 ImGui.EndMenu();
             }
@@ -87,6 +102,27 @@ namespace Anvil
         private void CreateWorld()
         {
             EditorWorld = new World(Anvil.Window);
+        }
+
+        private void OpenZone(string zonePath = null)
+        {
+            // Show dialog if no path
+            if (zonePath == null)
+            {   
+                ImGui.PushOverrideID(0);
+                FileBrowser.OpenFile((path) =>
+                {
+                    OpenZone(path);
+                }, "", "*.zone");
+                ImGui.PopID();
+
+                return;
+            }
+
+            var zone      = new Zone(zonePath);
+            EditZone      = new();
+            EditZone.Zone = zone;
+            Logging.LogInfo(LogCategories.ZoneEd, "Loaded zone {zone}", zone.Header.Name);
         }
     }
 }

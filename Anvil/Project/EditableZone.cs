@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Anvil.IO.Zone;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Anvil
 {
-    public enum LogCategories
+    public class EditableZone
     {
-        Default,
-        AssetExplorer,
-        ZoneEd,
-        Anvil_IO
+        public Zone Zone;
     }
 }

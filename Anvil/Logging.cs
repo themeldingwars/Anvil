@@ -60,7 +60,7 @@ namespace Anvil
                 _                         => LogLevel.Warn,
             };
 
-            var cat = Enum.Parse<LogCategories>(logEvent.Properties["Category"].ToString());
+            var cat = Enum.TryParse<LogCategories>(logEvent.Properties["Category"].ToString(), out var cate) ? cate : LogCategories.Default;
             AnvilTool.Ref.LogWindow.AddLog(anvilLogLevel, cat, message);
         }
     }

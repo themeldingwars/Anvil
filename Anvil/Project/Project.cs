@@ -10,5 +10,11 @@ namespace Anvil
     {
         public string Name;
         public string GameInstallPath;
+
+        public override string ToString()
+        {
+            var str = $"{Name} at {GameInstallPath}";
+            return str ;
+        }
     }
 }
