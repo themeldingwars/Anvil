@@ -41,7 +41,7 @@ namespace Anvil
 
         public override void Load()
         {
-            
+            OpenZone("D:\\NonWindows\\Games\\Firefall\\system\\maps\\12.zone");
         }
 
         public override void Unload()
@@ -113,7 +113,7 @@ namespace Anvil
                 FileBrowser.OpenFile((path) =>
                 {
                     OpenZone(path);
-                }, "", "*.zone");
+                }, "D:\\NonWindows\\Games\\Firefall\\system\\maps", "*.zone");
                 ImGui.PopID();
 
                 return;

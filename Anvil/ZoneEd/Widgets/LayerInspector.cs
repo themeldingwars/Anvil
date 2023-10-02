@@ -31,9 +31,10 @@ namespace Anvil.ZoneEd.Widgets
 
         private InspectorBase CreateInspectorForLayer(Layer layer)
         {
-            var inspector = layer.LayerType switch
+            InspectorBase inspector = layer.Data switch
             {
-                _ => new UnknownInspector(layer)
+                LayerDataUnknown => new UnknownInspector(layer),
+                _                => new GenericInspector(layer)
             };
 
             return inspector;

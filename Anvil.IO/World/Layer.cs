@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using Anvil.IO.World.Zone.Layers;
+using Serilog;
 using Serilog.Core;
 using System;
 using System.Collections.Generic;
@@ -79,7 +80,7 @@ namespace Anvil.IO.World
         {
             var result = (parentLayerId, layerId) switch
             {
-                (_,         0x30000)   => (LayerType.Zone,                              new LayerDataUnknown()),
+                (_,         0x30000)   => (LayerType.Zone,                              new LayerDataUnknown() as LayerData),
                 (_,         0x20000)   => (LayerType.ZoneSkybox,                        new LayerDataUnknown()),
                 (_,         0x20100)   => (LayerType.ZoneDefaultEnviroment,             new LayerDataUnknown()),
                 (_,         0x02710)   => (LayerType.ZoneDefaultEnviroment_1000,        new LayerDataUnknown()),
@@ -88,9 +89,9 @@ namespace Anvil.IO.World
                 (_,         0x20300)   => (LayerType.ZoneWater,                         new LayerDataUnknown()),
                 (0x20300,   0x4)       => (LayerType.ZoneWaterChild,                    new LayerDataUnknown()),
                 (_,         0x20400)   => (LayerType.ZoneChunkInfo,                     new LayerDataUnknown()),
-                (0x20400,   0x10000)   => (LayerType.ZoneChunkInfoRange,                new LayerDataUnknown()),
-                (0x20400,   0x10101)   => (LayerType.ZoneChunkInfoRef,                  new LayerDataUnknown()),
-                (0x20400,   0x10100)   => (LayerType.ZoneChunkInfoRef2,                 new LayerDataUnknown()),
+                (0x20400,   0x10000)   => (LayerType.ZoneChunkInfoRange,                new ChunkZoneRange()),
+                (0x20400,   0x10101)   => (LayerType.ZoneChunkInfoRef,                  new ChunkRef()),
+                (0x20400,   0x10100)   => (LayerType.ZoneChunkInfoRef2,                 new ChunkRef2()),
                 (_,         0x20700)   => (LayerType.ZoneMeldingHeightMap,              new LayerDataUnknown()),
                 (_,         0x20800)   => (LayerType.ZonePath,                          new LayerDataUnknown()),
                 (_,         0x20900)   => (LayerType.ZoneWorldChunkImport,              new LayerDataUnknown()),
