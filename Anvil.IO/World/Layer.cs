@@ -81,11 +81,11 @@ namespace Anvil.IO.World
             var result = (parentLayerId, layerId) switch
             {
                 (_,         0x30000)   => (LayerType.Zone,                              new LayerDataUnknown() as LayerData),
-                (_,         0x20000)   => (LayerType.ZoneSkybox,                        new LayerDataUnknown()),
+                (_,         0x20000)   => (LayerType.ZoneSkybox,                        new ZoneSkybox()),
                 (_,         0x20100)   => (LayerType.ZoneDefaultEnviroment,             new LayerDataUnknown()),
                 (_,         0x02710)   => (LayerType.ZoneDefaultEnviroment_1000,        new LayerDataUnknown()),
                 (_,         0x20200)   => (LayerType.ZoneMelding,                       new LayerDataUnknown()),
-                (0x20200,   0x5)       => (LayerType.ZoneMeldingPerimiter,              new LayerDataUnknown()),
+                (0x20200,   0x5)       => (LayerType.ZoneMeldingPerimiter,              new ZoneMeldingPerimiter()),
                 (_,         0x20300)   => (LayerType.ZoneWater,                         new LayerDataUnknown()),
                 (0x20300,   0x4)       => (LayerType.ZoneWaterChild,                    new LayerDataUnknown()),
                 (_,         0x20400)   => (LayerType.ZoneChunkInfo,                     new LayerDataUnknown()),
