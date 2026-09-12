@@ -7,9 +7,7 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
         <Title>Anvil</Title>
-        <Company>The Melding Wars</Company>
         <Authors>GoomiiV2</Authors>
-        <RepositoryUrl>https://github.com/themeldingwars/Anvil</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
