@@ -9,14 +9,19 @@
         <Title>Anvil</Title>
         <Company>The Melding Wars</Company>
         <Authors>GoomiiV2</Authors>
-        <Version>1.0.0</Version>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <RepositoryUrl>https://github.com/themeldingwars/Anvil</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Anvil.IO\Anvil.IO.csproj" />
       <ProjectReference Include="..\TempImtoolSubModule\ImTool\ImTool.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Nerdbank.GitVersioning" Version="3.6.146">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <PropertyGroup>
