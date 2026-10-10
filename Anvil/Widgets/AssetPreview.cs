@@ -8,19 +8,18 @@ using System.Numerics;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Veldrid.ImageSharp;
 using Vortice.Mathematics;
 
 namespace Anvil
 {
     public class AssetPreview
     {
-        private ImageSharpTexture testImage;
+        private ImageTexture testImage;
 
         public AssetPreview()
         {
             Stream resFilestream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"Anvil.Resources.Icons.Ratchet.png");
-            testImage = new ImageSharpTexture(resFilestream);
+            testImage = new ImageTexture(resFilestream);
         }
 
         public void Draw()
